@@ -1,20 +1,25 @@
 steps:
-# Build the container image
-- name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '-t', 'gcr.io/$PROJECT_ID/restaurant:$COMMIT_SHA', '.']
-# Push the container image to container registry
-- name: 'gcr.io/cloud-builders/docker'
-  args: ['push', 'gcr.io/$PROJECT_ID/restaurant:$COMMIT_SHA']
-# Deploy container image to Cloud Run
-- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
-  entrypoint: gcloud
-  args:
-  - 'run'
-  - 'deploy'
-  - 'restaurant'
-  - '--image'
-  - 'gcr.io/$PROJECT_ID/restaurant:$COMMIT_SHA'
-  - '--region'
-  - 'us-central1'
-images:
-- 'gcr.io/$PROJECT_ID/restaurant:$COMMIT_SHA'
+  # Docker Build
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 
+           'gcr.io/$PROJECT_ID/restaurants:$COMMIT_SHA','.'
+           '.']
+
+  # Docker Push CONTAINER IMAGE TO REGISTRY
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 
+           'gcr.io/$PROJECT_ID/restaurants:$COMMIT_SHA']
+#Deploy container image to cloud run
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: gcloud
+   # timeout: 240s
+    args:
+       - 'run'
+       - 'deploy'
+       - 'restaurants'
+       - '--image'
+       -'gcr.io/$PROJECT_ID/restaurants:$COMMIT_SHA'
+       - '--region'
+       - 'us-central1'
+  images:
+ - 'gcr.io/$PROJECT_ID/restaurants:$COMMIT_SHA'
