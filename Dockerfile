@@ -16,4 +16,4 @@ FROM adoptopenjdk/openjdk11:alpine-jre
 COPY --from=builder /app/target/restaurant-*.jar /restaurant.jar
 
 #Run the Webservice whenever container starts
-CMD ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/restaurants.jar"]
+CMD ["java", "-Djava.security.egd=file:/dev/./urandom", "-jar", "/restaurants.jar"]
