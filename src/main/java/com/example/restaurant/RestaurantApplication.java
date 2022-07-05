@@ -15,7 +15,7 @@ public class RestaurantApplication {
     
 	@GetMapping("/")
 	public String welcome() {
-		return "Welcome All";
+		return "Welcome All-Checking ";
 	}
 	
 	@GetMapping("/restaurant")
